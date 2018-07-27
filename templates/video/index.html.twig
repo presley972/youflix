@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ controller_name }}!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Hello {{ controller_name }}! ✅</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.createAt) }}
+    {{ form_row(form.user) }}
+    {{ form_row(form.submit) }}
+    {{ form_end(form) }}
+
+    {% for clip in video %}
+        <h1>{{ clip.title }}</h1>
+
+        {% set clip_link = clip.content  %}
+
+        <iframe width="560" height="315" src="{{ clip_link  | replace({ 'watch?v=': 'embed/'}) }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    {% endfor %}
+
+
+
+</div>
+{% endblock %}
