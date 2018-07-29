@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -14,6 +15,7 @@ class UserController extends Controller
     /**
      * @Route("/user", name="user")
      * @param Request $request
+     * @param UserRepository $userRepository
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(Request $request, UserRepository $userRepository)
@@ -35,5 +37,24 @@ class UserController extends Controller
                 'user' => $users
         )
         );
+    }
+
+
+    /**
+     * @Route("/user/{byFirstname}", name="user_firstname")
+     * @ParamConverter("user", options={"mapping"={"byFirstname"="firstname"}})
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @param User $user
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function firstname(Request $request, UserRepository $userRepository, User $user){
+
+        return $this->render('user/user.html.twig',[
+                'user'=> $user,
+            ]
+
+        );
+
     }
 }

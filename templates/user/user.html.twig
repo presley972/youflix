@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+
+
+{% block body %}
+
+    <a href="/">
+        home
+    </a>
+
+
+    {% for video in user.videos %}
+
+            <h1>{{ video.title }}</h1>
+
+            {% set video_link = video.content  %}
+
+            <iframe width="560" height="315" src="{{ video_link  | replace({ 'watch?v=': 'embed/'}) }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+
+
+    {% endfor %}
+{% endblock %}

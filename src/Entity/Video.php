@@ -17,6 +17,7 @@ class Video
     private $id;
 
     /**
+     * @ORM\Column(unique=true)
      * @ORM\Column(type="string", length=255)
      */
     private $title;
