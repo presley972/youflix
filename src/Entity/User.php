@@ -39,7 +39,6 @@ class User implements UserInterface
     private $birthday;
 
     /**
-     * @ORM\Column(unique=true)
      * @Assert\Email()
      * @ORM\Column(type="string", length=255)
      */
@@ -107,20 +106,19 @@ class User implements UserInterface
         return $this;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
     /**
-     * @param mixed $email
+     * @param string $email
+     * @return User
      */
-    public function setEmail($email): void
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+        return $this;
     }
 
     /**
@@ -223,7 +221,7 @@ class User implements UserInterface
     /**
      * @param mixed $roles
      */
-    public function setRoles($roles): void
+    public function setRoles($roles)
     {
         $this->roles = $roles;
     }
@@ -231,7 +229,7 @@ class User implements UserInterface
     /**
      * @param mixed $password
      */
-    public function setPassword($password): void
+    public function setPassword($password)
     {
         $this->password = $password;
     }
