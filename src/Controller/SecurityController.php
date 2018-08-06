@@ -88,4 +88,19 @@ class SecurityController extends Controller
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/admin", name="admin")
+     * @param UserRepository $userRepository
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function admin(UserRepository $userRepository)
+    {
+
+        $users = $userRepository->findAll();
+        return $this->render('security/admin.html.twig', [
+            'users' => $users
+        ]);
+
+    }
 }

@@ -10,6 +10,8 @@ class HomeController extends Controller
 {
     /**
      * @Route("/", name="home")
+     * @param UserRepository $userRepository
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function index(UserRepository $userRepository)
     {

@@ -21,20 +21,18 @@ class User implements UserInterface
     private $id;
 
     /**
-     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255,  nullable=true)
      */
     private $firstname;
 
     /**
-     * @Assert\NotBlank()
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
     /**
      * @Assert\DateTime()
-     * @ORM\Column(type="datetime",  nullable=true)
+     * @ORM\Column(type="datetime",  nullable=true, nullable=true)
      */
     private $birthday;
 
@@ -224,6 +222,7 @@ class User implements UserInterface
     public function setRoles($roles)
     {
         $this->roles = $roles;
+        return $this;
     }
 
     /**

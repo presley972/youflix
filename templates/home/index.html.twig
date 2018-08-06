@@ -15,16 +15,16 @@
         <h1>Hello {{ controller_name }}! ✅</h1>
 
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <p>Email: {{ app.user.firstname }}</p>
+     <a href="user/{{ app.user.firstname  }}">{{ app.user.firstname }}</a>
         {% else %}
         <p>Welcome Anonymous</p>
         {% endif %}
 
-        This friendly message is coming from:
-        {% for user in users %}
-            <a href="{{ path('user_firstname', {'byFirstname':user.firstname})}}">
-                {{ user.firstname }}
-            </a>
-        {% endfor %}
+
+
+
+
+
+        <a href="/profile"> profile</a>
     </div>
 {% endblock %}

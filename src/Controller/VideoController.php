@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Video;
 use App\Form\VideoType;
 use App\Repository\VideoRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -42,4 +44,22 @@ class VideoController extends Controller
             'video' => $videos
         ));
     }
+
+
+    /**
+     * @Route("/video/remove/{id}", name="video_remove")
+     * @ParamConverter("video", options={"mapping"={"id"="id"}})
+     * @param Video $video
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+
+    public function remove(Video $video, EntityManagerInterface $entityManager){
+
+        $entityManager->remove($video);
+        $entityManager->flush();
+        return $this->redirectToRoute('home');
+
+    }
+
 }

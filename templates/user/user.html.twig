@@ -17,6 +17,8 @@
 
             <iframe width="560" height="315" src="{{ video_link  | replace({ 'watch?v=': 'embed/'}) }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
+        <a href="{{ path('video_remove', {'id': video.id}) }}">suprimer</a>
+
 
 
     {% endfor %}

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -56,5 +57,23 @@ class UserController extends Controller
 
         );
 
+    }
+
+    /**
+     * @Route("/user/remove/{id}", name="user_remove")
+     * @param User $user
+     * @param EntityManagerInterface $entityManager
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function remove(User $user, EntityManagerInterface $entityManager)
+    {
+        $videos = $user->getVideos();
+        foreach ($videos as $video){
+            $video->setUser(null);
+        }
+
+        $entityManager->remove($user);
+        $entityManager ->flush();
+        return $this->redirectToRoute('home');
     }
 }
