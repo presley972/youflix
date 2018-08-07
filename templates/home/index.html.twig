@@ -11,20 +11,37 @@
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
 
-    <div class="example-wrapper">
-        <h1>Hello {{ controller_name }}! ✅</h1>
-
+    <div class="container">
         {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-     <a href="user/{{ app.user.firstname  }}">{{ app.user.firstname }}</a>
+            <h1>Hello {{ app.user.firstname }}</h1>
         {% else %}
-        <p>Welcome Anonymous</p>
+            <h3>
+                Welcome to youflix here you can do a playliste of what you love in youtube an more soon
+            </h3>
         {% endif %}
 
+        <div class="row">
+        {% for clip in videos %}
+            <div class="col-sm">
+
+            {% set clip_link = clip.content  %}
+
+            <iframe width="200" height="115" src="{{ clip_link  | replace({ 'watch?v=': 'embed/'}) }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                <div class="media-body">
+                    <h5 class="mt-0">{{ clip.title }}</h5>
+                    Cras sit amet nibh libero, in gravida nulla.  in faucibus.
+                </div>
+            <a href="{{ path('user_firstname', {'byFirstname':clip.user.firstname})}}">{{ clip.user.firstname }}</a>
+
+
+            </div>
+        {% endfor %}
+        </div>
 
 
 
 
 
-        <a href="/profile"> profile</a>
+
     </div>
 {% endblock %}

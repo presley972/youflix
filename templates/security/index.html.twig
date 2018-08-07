@@ -1,20 +1,47 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello {{ controller_name }}!{% endblock %}
-
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+<div class="container-fluid img">
 
-{{ form_start(form) }}
-    {{ form_row(form.firstname) }}
-    {{ form_row(form.lastname) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.birthday) }}
-    {{ form_row(form.password.first) }}
-    {{ form_row(form.password.second) }}
-    {{ form_row(form.submit) }}
-    {{ form_end(form) }}
+
+    <div class="container">
+        <div class="card" style="width: 18rem;">
+            <div class="form-row">
+        {{ form_start(form) }}
+                <div class="col-md-1 mb-1">
+        {{ form_row(form.firstname)}}
+                </div>
+                <div class="col-md-1 mb-1">
+        {{ form_row(form.lastname) }}
+                </div>
+                <div class="col-md-1 mb-1">
+        {{ form_row(form.email) }}
+                </div>
+                <div class="col">
+        {{ form_row(form.birthday) }}
+                </div>
+                <div class="col-md-1 mb-1">
+        {{ form_row(form.password.first) }}
+                </div>
+                <div class="col-md-1 mb-1">
+        {{ form_row(form.password.second) }}
+                </div>
+                <div class="col-md-4 mb-3">
+                    <button class="btn btn-primary">
+                    </button>
+                </div>
+        {{ form_end(form) }}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
 {% endblock %}
