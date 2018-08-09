@@ -29,7 +29,7 @@
             <iframe width="200" height="115" src="{{ clip_link  | replace({ 'watch?v=': 'embed/'}) }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
                 <div class="media-body">
                     <h5 class="mt-0">{{ clip.title }}</h5>
-                    Cras sit amet nibh libero, in gravida nulla.  in faucibus.
+                    <p>{{ clip.comment }}</p>
                 </div>
             <a href="{{ path('user_firstname', {'byFirstname':clip.user.firstname})}}">{{ clip.user.firstname }}</a>
 

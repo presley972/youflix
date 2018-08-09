@@ -38,6 +38,13 @@ class Video
      */
     private $user;
 
+    /**
+     * /**
+     * @ORM\Column(type="text")
+     *  @ORM\JoinColumn(nullable=true)
+     */
+    private $comment;
+
     public function getId()
     {
         return $this->id;
@@ -89,5 +96,16 @@ class Video
         $this->user = $user;
 
         return $this;
+    }
+
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+
+    public function setComment($comment): void
+    {
+        $this->comment = $comment;
     }
 }

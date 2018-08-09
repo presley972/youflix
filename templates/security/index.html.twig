@@ -1,47 +1,64 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
-<div class="container-fluid img">
 
-
+    <div class="container-fluid ">
     <div class="container">
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
         <div class="card" style="width: 18rem;">
-            <div class="form-row">
-        {{ form_start(form) }}
-                <div class="col-md-1 mb-1">
-        {{ form_row(form.firstname)}}
-                </div>
-                <div class="col-md-1 mb-1">
-        {{ form_row(form.lastname) }}
-                </div>
-                <div class="col-md-1 mb-1">
-        {{ form_row(form.email) }}
-                </div>
-                <div class="col">
-        {{ form_row(form.birthday) }}
-                </div>
-                <div class="col-md-1 mb-1">
-        {{ form_row(form.password.first) }}
-                </div>
-                <div class="col-md-1 mb-1">
-        {{ form_row(form.password.second) }}
-                </div>
-                <div class="col-md-4 mb-3">
-                    <button class="btn btn-primary">
-                    </button>
-                </div>
-        {{ form_end(form) }}
+<h3> Enregistrer vous  </h3>
+            {{ form_start(form) }}
+
+            <div class="container">
+                {{ form_label(form.firstname, 'Prenom') }}
+                {{ form_widget(form.firstname)}}
             </div>
+
+            <div class="container">
+                {{ form_label(form.lastname, 'Nom') }}
+                {{ form_widget(form.lastname) }}
+            </div>
+
+            <div class="container">
+                {{ form_row(form.email) }}
+            </div>
+            <div class="container">
+                {{ form_label(form.birthday, 'Date de naissance') }}
+                {{ form_widget(form.birthday) }}
+            </div>
+
+
+            <div class="container">
+                {{ form_label(form.password.first, 'mots de passe') }}
+                {{ form_widget(form.password.first) }}
+
+            </div>
+
+            <div class="container">
+                {{ form_label(form.password.second, 'répéter le mots de passe') }}
+                {{ form_widget(form.password.second) }}
+            </div>
+
+
+            <div class="container">
+                <br>
+                {{ form_row(form.submit) }}
+            </div>
+
+
+            {{ form_end(form) }}
         </div>
 
     </div>
+    </div>
 
-</div>
 
 {% endblock %}

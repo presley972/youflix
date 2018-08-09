@@ -27,6 +27,8 @@ class VideoController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()){
+            $video->setUser($this->getUser());
+            $video->setCreateAt(new \DateTime());
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($video);
@@ -41,7 +43,7 @@ class VideoController extends Controller
 
             'form'=>$form->createView(),
             'controller_name'=>"presley",
-            'video' => $videos
+            'video' =>$videos
         ));
     }
 
