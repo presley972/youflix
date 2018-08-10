@@ -146,5 +146,39 @@ class SecurityController extends Controller
         );
     }
 
+    /**
+     * @Route("/profile/{id}", name="edit_profile")
+     * @ParamConverter("profile", options={"mapping"={"id"="id"}})
+     * @param Request $request
+     * @param EntityManagerInterface $entityManager
+     * @param UserRepository $userRepository
+     * @param int $id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function editprofil(Request $request, EntityManagerInterface $entityManager,
+                              UserRepository $userRepository, int $id)
+    {
+
+        $user = $userRepository->find($id);
+        $form = $this->createForm(ProfileType::class, $user);
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($user);
+            $entityManager->flush();
+            return $this->redirectToRoute('admin');
+        }
+
+
+
+        return $this->render('security/profile.html.twig', [
+                'user' => $user,
+                'form' => $form->createView()
+            ]
+
+        );
+    }
+
 
 }

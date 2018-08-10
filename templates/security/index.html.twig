@@ -10,10 +10,10 @@
     </style>
     <link rel="stylesheet" href="{{ asset('build/app.css') }}">
 
-    <div class="container-fluid ">
-    <div class="container">
+    <body class="img-security">
+    <div class="container-fluid">
         {% form_theme form 'bootstrap_4_layout.html.twig' %}
-        <div class="card" style="width: 18rem;">
+        <div class="card security" style="width: 18rem;">
 <h3> Enregistrer vous  </h3>
             {{ form_start(form) }}
 
@@ -58,7 +58,6 @@
         </div>
 
     </div>
-    </div>
 
-
+    </body>
 {% endblock %}

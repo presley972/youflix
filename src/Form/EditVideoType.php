@@ -15,7 +15,7 @@ class EditVideoType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('createAt')
+            ->add('comment')
             ->add('submit', SubmitType::class)
         ;
     }

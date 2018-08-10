@@ -5,14 +5,25 @@
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
         .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
     </style>
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+    <body class="img-login">
+    <div class="container-fluid">
 
-    <div class="example-wrapper img">
+        <div class="card login" style="width: 18rem;">
 
-
+            <h3> Connectez-vous! </h3>
         {{ form_start(form) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password) }}
+            <div class="container">
+                {{ form_row(form.email) }}
+            </div>
+        <div class="container">
+            {{ form_row(form.password) }}
+        </div>
+
         {{ form_row(form.submit) }}
         {{ form_end(form) }}
+        </div>
     </div>
+
+</body>
 {% endblock %}

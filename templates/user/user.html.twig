@@ -4,25 +4,37 @@
 
 {% block body %}
 
-    <a href="/">
-        home
-    </a>
+
+<div class="container">
+
+    <h1 style="padding-left: 20%; margin-top: 20px;  " > Your Playliste {{ user.firstname }}</h1>
+
+    <div class="card-deck">
+        {% for clip in user.videos %}
+            <div class="col-sm">
+
+                {% set clip_link = clip.content  %}
+                <div class="card" style="width: 18rem;">
+                    <iframe width="286" height="180" src="{{ clip_link  | replace({ 'watch?v=': 'embed/'}) }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                    <div class="card-body">
+                        <h6 class="card-title">{{ clip.title }}</h6>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ clip.createAt |date("m/d/Y") }}</h6>
+                        <p class="card-text">{{ clip.comment }}</p>
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <a href="{{ path('video_remove', {'id': clip.id}) }}">suprimer</a>
+                            <a href="{{ path('edit_video', {'id': clip.id}) }}"> modif</a>
+                        {% endif %}
 
 
-    {% for video in user.videos %}
-
-            <h1>{{ video.title }}</h1>
-
-            {% set video_link = video.content  %}
-
-            <iframe width="560" height="315" src="{{ video_link  | replace({ 'watch?v=': 'embed/'}) }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="{{ path('video_remove', {'id': video.id}) }}">suprimer</a>
-        <a href="{{ path('edit_video', {'id': video.id}) }}"> modif</a>
-        {% endif %}
+                    </div>
+                </div>
+                <br>
 
 
 
-    {% endfor %}
+
+            </div>
+        {% endfor %}
+
+</div>
 {% endblock %}
