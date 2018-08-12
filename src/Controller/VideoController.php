@@ -33,6 +33,7 @@ class VideoController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($video);
             $entityManager->flush();
+            return $this->redirectToRoute('home');
 
         }
 

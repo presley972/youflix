@@ -15,13 +15,31 @@
 
     {% endif %}
 
-    {{ form_start(form) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.content) }}
-    {{ form_row(form.comment) }}
-    {{ form_row(form.submit) }}
-    {{ form_end(form) }}
 
+
+    {{ form_start(form) }}
+
+    <div class="container">
+        {{ form_label(form.title, 'Titre') }}
+        {{ form_widget(form.title)}}
+    </div>
+
+    <div class="container">
+        {{ form_label(form.content, 'URL YouTube') }}
+        {{ form_widget(form.content) }}
+    </div>
+
+    <div class="container">
+        {{ form_label(form.comment, 'Lache un commentaire!') }}
+        {{ form_widget(form.comment) }}
+    </div>
+    <div class="container">
+        <br>
+        {{ form_row(form.submit) }}
+    </div>
+
+
+    {{ form_end(form) }}
 
 
 
