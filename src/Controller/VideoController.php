@@ -59,9 +59,15 @@ class VideoController extends Controller
 
     public function remove(Video $video, EntityManagerInterface $entityManager){
 
-        $entityManager->remove($video);
-        $entityManager->flush();
-        return $this->redirectToRoute('home');
+        if ($video->getUser() == $this->getUser() or $this->isGranted('ROLE_ADMIN')) {
+            $entityManager->remove($video);
+            $entityManager->flush();
+            return $this->redirectToRoute('home');
+        }
+        else{
+            $this->addFlash('alert', 'Désolé mais vous ne pouvez pas suprimer cette video!');
+            return $this->redirectToRoute('home');
+        }
 
     }
 

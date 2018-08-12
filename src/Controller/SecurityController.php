@@ -134,14 +134,19 @@ class SecurityController extends Controller
         $form = $this->createForm(EditVideoType::class, $video);
         $form->handleRequest($request);
 
+        if ($video->getUser() == $this->getUser() or $this->isGranted('ROLE_ADMIN')) {
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($video);
-            $entityManager->flush();
-            return $this->redirectToRoute('video');
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($video);
+                $entityManager->flush();
+                return $this->redirectToRoute('video');
+            }
         }
-
-
+        else{
+            $this->addFlash('alert', 'Désolé mais vous ne pouvez pas modifié cette video!');
+            return $this->redirectToRoute('home');
+        }
 
         return $this->render('security/edit.html.twig', [
                 'video' => $video,
