@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\Video;
+use App\Event\UserRegisteredEvent;
 use App\Form\EditVideoType;
 use App\Form\LoginType;
 use App\Form\ProfileType;
@@ -12,6 +13,7 @@ use App\Repository\UserRepository;
 use App\Repository\VideoRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,9 +27,10 @@ class SecurityController extends Controller
      * @Route("/security", name="security")
      * @param Request $request
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param EventDispatcherInterface $eventDispatcher
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder, EventDispatcherInterface $eventDispatcher)
     {
         $user = new User();
         $form = $this->createForm(RegisterType::class, $user);
@@ -39,8 +42,10 @@ class SecurityController extends Controller
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash('notice', 'Merci de votres confiance!');
+            $event = new UserRegisteredEvent($user);
+            $eventDispatcher->dispatch(UserRegisteredEvent::NAME,$event);
             return $this->redirectToRoute('home');
-
         }
         return $this->render('security/index.html.twig', [
             'controller_name' => 'SecurityController',
@@ -153,10 +158,11 @@ class SecurityController extends Controller
      * @param EntityManagerInterface $entityManager
      * @param UserRepository $userRepository
      * @param int $id
+     * @param UserPasswordEncoderInterface $passwordEncoder
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function editprofil(Request $request, EntityManagerInterface $entityManager,
-                              UserRepository $userRepository, int $id)
+                              UserRepository $userRepository, int $id, UserPasswordEncoderInterface $passwordEncoder)
     {
 
         $user = $userRepository->find($id);
@@ -165,6 +171,8 @@ class SecurityController extends Controller
 
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $password = $passwordEncoder->encodePassword($user, $user->getPassword());
+            $user->setPassword($password);
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('admin');

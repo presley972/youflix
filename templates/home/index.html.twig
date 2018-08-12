@@ -4,7 +4,13 @@
 {% block title %}Hello {{ controller_name }}!{% endblock %}
 
 {% block body %}
-
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="flash-{{ label }} alert alert-secondary" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
 
     <style>
         .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -40,7 +46,7 @@
 
                             <!-- Modal -->
                             <div class="modal fade" id="modal-{{ clip.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="exampleModalLongTitle">{{ clip.title }}</h5>
@@ -48,8 +54,9 @@
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body d-flex justify-content-center">
                                             <iframe width="560" height="315" src="{{ clip_link  | replace({ 'watch?v=': 'embed/'}) }}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
