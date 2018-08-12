@@ -13,6 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class VideoController extends Controller
 {
+    //Partie pour enregistrer une video
     /**
      * @Route("/video", name="video")
      * @param Request $request
@@ -48,7 +49,7 @@ class VideoController extends Controller
         ));
     }
 
-
+//Partie pour supprimer une video
     /**
      * @Route("/video/remove/{id}", name="video_remove")
      * @ParamConverter("video", options={"mapping"={"id"="id"}})

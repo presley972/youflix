@@ -22,3 +22,6 @@ class CommentController extends Controller
         ]);
     }
 }
+
+
+// Pour le moment sa sert a rien mais je compte mettre des commentaire sous les video dans la modal

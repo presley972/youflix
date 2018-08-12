@@ -40,7 +40,7 @@ class UserController extends Controller
         );
     }
 
-
+//Partie pour voir toute les videos d'un utilisateur
     /**
      * @Route("/user/{byFirstname}", name="user_firstname")
      * @ParamConverter("user", options={"mapping"={"byFirstname"="firstname"}})
@@ -59,6 +59,7 @@ class UserController extends Controller
 
     }
 
+    //Partie pour suprimer un utilisateur par un admin
     /**
      * @Route("/user/remove/{id}", name="user_remove")
      * @param User $user

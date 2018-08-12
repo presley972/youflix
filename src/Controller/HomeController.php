@@ -39,3 +39,5 @@ class HomeController extends Controller
 
 
 }
+
+// Controller de la home elle nous permets de listé toutes les utilisateur et leurs videos

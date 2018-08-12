@@ -58,3 +58,4 @@ class AppCreateAdminCommand extends Command
     }
 }
 
+//commande pour créer un Admin

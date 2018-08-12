@@ -23,6 +23,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends Controller
 {
+  //Partie pour s'enregistrer comme utilisateur avec un petit message de remerciment
+
     /**
      * @Route("/security", name="security")
      * @param Request $request
@@ -53,7 +55,7 @@ class SecurityController extends Controller
         ]);
     }
 
-
+//Partie pour s'identifier comme utilisateur
     /**
      * @Route("/login", name="login")
      * @param AuthenticationUtils $authenticationUtils
@@ -74,7 +76,7 @@ class SecurityController extends Controller
 
     }
 
-
+//Partie pour modifier le profile
     /**
      * @Route("/profile", name="profile")
      * @param Request $request
@@ -100,7 +102,7 @@ class SecurityController extends Controller
             'form' => $form->createView()
         ]);
     }
-
+//Partie pour la gestion de l'admin et de tous les utilisateur
     /**
      * @Route("/admin", name="admin")
      * @param UserRepository $userRepository
@@ -116,7 +118,7 @@ class SecurityController extends Controller
 
     }
 
-
+//Partie pour modifier les video et je les récupère par leurs identifiant seul l'utilisateur qui a mit cette video et l'admin peuvent la modifier
     /**
      * @Route("/edit/{id}", name="edit_video")
      * @ParamConverter("edit", options={"mapping"={"id"="id"}})
@@ -155,7 +157,7 @@ class SecurityController extends Controller
 
         );
     }
-
+//Partie pour que l'admin modifi un utilisateur
     /**
      * @Route("/profile/{id}", name="edit_profile")
      * @ParamConverter("profile", options={"mapping"={"id"="id"}})
