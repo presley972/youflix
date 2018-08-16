@@ -38,7 +38,9 @@
                             <h6 class="card-title">{{ clip.title }}</h6>
                             <h6 class="card-subtitle mb-2 text-muted">{{ clip.createAt |date("m/d/Y") }}</h6>
                             <p class="card-text">{{ clip.comment }}</p>
+                            {% if clip.user == true %}
                             <a href="{{ path('user_firstname', {'byFirstname':clip.user.firstname})}}">{{ clip.user.firstname }}</a>
+                            {% endif %}
                             <!-- Button trigger modal -->
                             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-{{ clip.id }}">
                                 Big
